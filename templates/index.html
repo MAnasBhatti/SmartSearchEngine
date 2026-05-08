@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TF-IDF Search Engine</title>
+    <style>
+        :root {
+            --bg-color: #0b0c10;
+            --card-bg: #1f2833;
+            --text-main: #c5c6c7;
+            --neon-blue: #66fcf1;
+            --neon-dark: #45a29e;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .header {
+            margin-top: 50px;
+            text-align: center;
+        }
+        h1 {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px rgba(102, 252, 241, 0.5);
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        p.subtitle {
+            color: var(--neon-dark);
+            margin-top: 0;
+            font-size: 1.1rem;
+        }
+        .search-container {
+            margin-top: 30px;
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            gap: 10px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid var(--neon-dark);
+            background-color: var(--card-bg);
+            color: white;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        input[type="text"]:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(102, 252, 241, 0.3);
+        }
+        button {
+            padding: 15px 30px;
+            background-color: var(--neon-blue);
+            color: var(--bg-color);
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(102, 252, 241, 0.4);
+        }
+        button:hover {
+            background-color: white;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+        }
+        .results-container {
+            margin-top: 40px;
+            width: 100%;
+            max-width: 700px;
+            padding-bottom: 50px;
+        }
+        .result-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--neon-blue);
+            transition: transform 0.2s ease;
+        }
+        .result-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .result-title {
+            color: white;
+            margin: 0 0 10px 0;
+            font-size: 1.3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .score-badge {
+            background-color: rgba(102, 252, 241, 0.1);
+            color: var(--neon-blue);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            border: 1px solid var(--neon-blue);
+        }
+        .result-snippet {
+            line-height: 1.6;
+            margin: 0;
+        }
+        .no-results {
+            text-align: center;
+            color: var(--neon-dark);
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>NLP Nexus Search</h1>
+        <p class="subtitle">Custom TF-IDF & Cosine Similarity Engine</p>
+    </div>
+    <form class="search-container" method="POST" action="/">
+        <input type="text" name="query" placeholder="Enter your search query..." value="{{ query }}" required autocomplete="off">
+        <button type="submit">Search</button>
+    </form>
+    <div class="results-container">
+        {% if query %}
+            {% if results %}
+                <p style="color: var(--neon-dark); margin-bottom: 20px;">Found {{ results|length }} results for "{{ query }}"</p>
+                {% for result in results %}
+                    <div class="result-card">
+                        <h3 class="result-title">
+                            {{ result.id }}
+                            <span class="score-badge">Relevance: {{ result.score }}</span>
+                        </h3>
+                        <p class="result-snippet">{{ result.snippet }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="no-results">No relevant documents found for "{{ query }}".</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
