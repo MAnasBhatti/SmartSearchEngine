@@ -63,6 +63,5 @@ A simple Flask-based TF-IDF search engine web app that ranks documents by cosine
 
 This project is provided as-is for learning and demonstration purposes.
 =======
-# SmartSearchEngine
-An intelligent search engine using TF-IDF to deliver accurate and relevant search results.
+
 >>>>>>> c6fd8f1cd053dddddebd56aa78e068db670a2c1c
