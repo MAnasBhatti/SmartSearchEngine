@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SearchEngine
 
 A simple Flask-based TF-IDF search engine web app that ranks documents by cosine similarity. This project includes a Python web app and Docker support for local development.
@@ -61,3 +62,7 @@ A simple Flask-based TF-IDF search engine web app that ranks documents by cosine
 ## License
 
 This project is provided as-is for learning and demonstration purposes.
+=======
+# SmartSearchEngine
+An intelligent search engine using TF-IDF to deliver accurate and relevant search results.
+>>>>>>> c6fd8f1cd053dddddebd56aa78e068db670a2c1c
